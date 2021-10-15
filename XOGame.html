@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XO Game</title>
+    <style>
+        table{
+            color: white;
+            margin: auto;
+            border: none;
+            background-color: darkblue;
+        }
+        td{
+            border: 1px solid white;
+            text-align: center;
+            font-size: 4rem;
+            cursor: pointer;
+        }
+        table tr td{
+            width: 200px;
+            height: 200px;
+        }
+        h2{
+            text-align: center;
+        }
+        #playername{
+            text-align: center;
+            font-size: 5rem;
+            display: none;
+        }
+        #playernameh1{
+            margin: 0%;
+            font-size: 8rem;
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <table border="2">
+            <tr>
+                <td id="box1" onclick="changeState1()"></td>
+                <td id="box2" onclick="changeState2()"></td>
+                <td id="box3" onclick="changeState3()"></td>
+            </tr>
+            <tr>
+                <td id="box4" onclick="changeState4()"></td>
+                <td id="box5" onclick="changeState5()"></td>
+                <td id="box6" onclick="changeState6()"></td>
+            </tr>
+            <tr>
+                <td id="box7" onclick="changeState7()"></td>
+                <td id="box8" onclick="changeState8()"></td>
+                <td id="box9" onclick="changeState9()"></td>
+            </tr>
+        </table>
+        <h2 id="yourturn"></h2>
+        <div id="playername">
+            You Win
+            <h1 id="playernameh1"></h1>
+        </div>
+        
+    </div>
+    <script>
+        var count=0
+        console.log(count)
+        var x='X',o='O'
+        var b1,b2,b3,b4,b5,b6,b7,b8,b9
+        var c1=0,c2=0,c3=0,c4=0,c5=0,c6=0,c7=0,c8=0,c9=0
+        var playe1,playe2
+        var win=0
+        player1=window.prompt("Player 1 Name")
+        player2=window.prompt("Player 2 Name")
+        document.getElementById("yourturn").innerHTML=count%2==0?player1+" Play":player2+" Play"
+        function changeState1(){
+            if(c1==0)
+            {
+                c1=1
+                count++
+                b1=document.getElementById("box1").innerHTML=count%2==0?x:o
+                document.getElementById("yourturn").innerHTML=count%2==0?player1+" Play":player2+" Play"
+                checking()
+            }
+        }
+        function changeState2(){
+            if(c2==0)
+            {
+                c2=1
+                count++
+                b2=document.getElementById("box2").innerHTML=count%2==0?x:o
+                document.getElementById("yourturn").innerHTML=count%2==0?player1+" Play":player2+" Play"
+                checking()
+            }
+        }
+        function changeState3(){
+            if(c3==0)
+            {
+                c3=1
+                count++
+                b3=document.getElementById("box3").innerHTML=count%2==0?x:o
+                document.getElementById("yourturn").innerHTML=count%2==0?player1+" Play":player2+" Play"
+                checking()
+            }
+        }
+        function changeState4(){
+            if(c4==0)
+            {
+                c4=1
+                count++
+                b4=document.getElementById("box4").innerHTML=count%2==0?x:o
+                document.getElementById("yourturn").innerHTML=count%2==0?player1+" Play":player2+" Play"
+                checking()
+            }
+        }
+        function changeState5(){
+            if(c5==0)
+            {
+                c5=1
+                count++
+                b5=document.getElementById("box5").innerHTML=count%2==0?x:o
+                document.getElementById("yourturn").innerHTML=count%2==0?player1+" Play":player2+" Play"
+                checking()
+            }
+        }
+        function changeState6(){
+            if(c6==0)
+            {
+                c6=1
+                count++
+                b6=document.getElementById("box6").innerHTML=count%2==0?x:o
+                document.getElementById("yourturn").innerHTML=count%2==0?player1+" Play":player2+" Play"
+                checking()
+            }
+        }
+        function changeState7(){
+            if(c7==0)
+            {
+                c7=1
+                count++
+                b7=document.getElementById("box7").innerHTML=count%2==0?x:o
+                document.getElementById("yourturn").innerHTML=count%2==0?player1+" Play":player2+" Play"
+                checking()
+            }
+        }
+        function changeState8(){
+            if(c8==0)
+            {
+                c8=1
+                count++
+                b8=document.getElementById("box8").innerHTML=count%2==0?x:o
+                document.getElementById("yourturn").innerHTML=count%2==0?player1+" Play":player2+" Play"
+                checking()
+            }
+        }
+        function changeState9(){
+            if(c9==0)
+            {
+                c9=1
+                count++
+                b9=document.getElementById("box9").innerHTML=count%2==0?x:o
+                document.getElementById("yourturn").innerHTML=count%2==0?player1+" Play":player2+" Play"
+                checking()
+            }
+        }
+        function checking()
+        {
+           if((b1=='X' && b2=='X' && b3=='X') || 
+              (b3=='X' && b6=='X' && b9=='X') ||
+              (b7=='X' && b8=='X' && b9=='X') ||
+              (b7=='X' && b4=='X' && b1=='X') ||
+              (b1=='X' && b2=='X' && b3=='X') ||
+              (b4=='X' && b5=='X' && b6=='X') ||
+              (b2=='X' && b5=='X' && b8=='X') ||
+              (b1=='X' && b5=='X' && b9=='X') ||
+              (b3=='X' && b5=='X' && b7=='X')
+              ){
+                  win=1
+                  document.getElementById("playername").style.display="block"
+                  document.getElementById("playernameh1").innerHTML=player1+" Win"
+           }
+           else if(
+              (b1=='O' && b2=='O' && b3=='O') || 
+              (b3=='O' && b6=='O' && b9=='O') ||
+              (b7=='O' && b8=='O' && b9=='O') ||
+              (b7=='O' && b4=='O' && b1=='O') ||
+              (b1=='O' && b2=='O' && b3=='O') ||
+              (b4=='O' && b5=='O' && b6=='O') ||
+              (b2=='O' && b5=='O' && b8=='O') ||
+              (b1=='O' && b5=='O' && b9=='O') ||
+              (b3=='O' && b5=='O' && b7=='O'))
+            {
+                win=1
+                document.getElementById("playername").style.display="block"
+                document.getElementById("playernameh1").innerHTML=player1+" Win"
+            }
+            if(count==9 && win==0){
+                alert("Try Again!")
+            }
+        }
+    </script>
+</body>
+</html>
