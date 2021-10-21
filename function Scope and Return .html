@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //global access
+        let a=5
+        function func(){
+            console.log(a)
+        }
+        func()
+        
+        let b=4 //global
+        function fnscope(){
+            b=2     // change value
+            console.log("From fnScope: "+b)
+        }        
+        console.log("From Global: "+b)
+        fnscope()
+        console.log(b)
+        /* ---------------------------------------------- */
+        let c=25    // global
+        function funct(){
+            let c=35    // local
+            console.log(c)
+        }
+        funct()
+        console.log(c)
+        /* ---------------------------------------------- */
+        const d=123
+        function cons(){
+            console.log(d)
+            //d=1234
+            console.log(d) // it will print error for it's constant
+        }
+        cons()
+        /* ---------------------------------------------- */
+
+        //function reusable code
+
+        let e=5, f=7
+        let g=add(5,7)
+        function add(e,f){
+            return e+f
+        }
+        console.log(g)
+        /* ---------------------------------------------- */
+        //function return 
+        function setValue5(){
+            return 5;
+        }
+        let h=setValue5()
+        console.log(h)
+        /* ---------------------------------------------- */
+        function boolreturn(i,j){
+            if(i===j){
+                return true
+            }
+            else{
+                return false
+            }
+        }
+        let i=5
+        let j=5
+        console.log(boolreturn(i,j))
+        /* ---------------------------------------------- */
+        function checkLength(arr)
+        {
+            let count=0
+            let i=0
+            let str=arr+"$"
+            while(true){
+                if(str[i]==','){
+                    count++
+                    i++
+                }
+                else if(str[i]=='$')
+                {
+                    break
+                }
+                else{
+                    i++
+                }
+            }
+            return count+1
+        }
+        let arr=[1,2,3,4,5,12,334,33,1,-1]
+        let arrlength=checkLength(arr)
+        console.log(arrlength)
+        /* ---------------------------------------------- */
+       
+    </script>
+</body>
+</html>

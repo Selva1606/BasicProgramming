@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiples of N Value </title>
+    <style>
+        p{
+            font-size: 2rem;
+        }
+            .main{
+                padding: 5%;
+                border-radius: 5%   ;
+                background-color: rgb(228, 228, 228);
+                position: absolute;
+                top: 10%;
+                left: 35%;
+                text-align: center;
+                margin: auto;
+            }
+            #finally{
+                padding: 5%;
+                border:none;
+                border-radius: 20px;
+                color: white;
+                background-color: rgb(1, 116, 1);
+            }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h1>Sum of Multiple of 3</h1>
+        <p id="sumofmultipleof3"></p>
+        <h1>Sum of Multiple of 5</h1>
+        <p id="sumofmultipleof5"></p>
+        <h1>Total</h1>
+        <p id="sumOfMultipleOfboth"></p>
+        <p>Common Value<p id="commonvalue"></p></p>
+        <h1 id="finally"></h1>
+        <script>
+            function sumOfMultipleOfN(limit,difference)
+            {
+            let n=parseInt(limit/difference)
+            let sum=n/2*(2*difference+(n-1)*difference)
+            return sum
+            }
+
+            let limit=30 // end value
+            let difference=3 // also start value
+            let sumofmultipleof3=sumOfMultipleOfN(limit,difference)
+            document.getElementById("sumofmultipleof3").innerHTML=sumofmultipleof3
+
+            difference=5
+            let sumofmultipleof5=sumOfMultipleOfN(limit,difference)
+            document.getElementById("sumofmultipleof5").innerHTML=sumofmultipleof5
+
+            let sumofmultipleofBoth=sumofmultipleof3+sumofmultipleof5
+            document.getElementById("sumOfMultipleOfboth").innerHTML=sumofmultipleofBoth
+            
+            difference=15
+            let commonvalue=sumOfMultipleOfN(limit,difference)
+            document.getElementById("commonvalue").innerHTML=commonvalue
+
+            sumofmultipleofBoth=sumofmultipleofBoth-commonvalue
+            document.getElementById("finally").innerHTML=sumofmultipleofBoth
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <title>Create a html table with java script</title>
+      <style>
+        td{
+          padding: 20px;
+          background-color: blue;
+        }
+      </style>
+      </head>
+      
+      <script type='text/javascript'>;
+      
+        function addCell(tr, val) 
+        {
+            var td = document.createElement('td');
+            td.setAttribute("id", "00");
+            td.innerHTML = val;
+            tr.appendChild(td)
+        }
+      
+      
+        function addRow(tbl, val_1,n) 
+        {
+            var tr = document.createElement('tr');
+            for(let i=0;i<n;i++)
+            {
+                addCell(tr, val_1);
+            }
+          tbl.appendChild(tr)
+        }
+      
+        function createTable() 
+        {
+            tbl = document.getElementById('tbl');
+            let n=document.getElementById('count').value
+            console.log(n)
+            for(let i=0;i<n;i++)
+            {
+                addRow(tbl, i+'',n);
+            }
+        }
+
+
+       /*  function createNxMTable(){
+          const n=3
+          let table = document.getElementById('tbl');
+          var tr = document.createElement('tr');
+          var td = document.createElement('td');
+          for(let i=0;i<n;i++)
+          {
+              for(let j=0;j<n;j++){
+                td.innerHTML='hfjghjs'
+                tr.appendChild(td)
+              }
+              tbl.appendChild(tr)
+          }
+        } */
+      </script>
+      
+      <body>
+         <table id='tbl' border=1></table>
+         <input type="text" name="" id="count">
+        <button onclick="createTable()">Create</button>
+      </body>
+</html>

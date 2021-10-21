@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="player1-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XO Game - </title>
+    <style>
+
+        .container{
+            
+            border: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        tr{
+            color: white;
+            border: none;
+        }
+        td{
+            
+            background-color: rgb(196, 25, 25);
+            border-radius: 40px;
+            border: 2px solid white;
+            text-align: center;
+            font-size: 4rem;
+            cursor: pointer;
+        }
+        table tr td{
+            width: 200px;
+            height: 200px;
+        }
+        h2{
+            text-align: center;
+        }
+        #playername{
+            text-align: center;
+            font-size: 5rem;
+            display: none;
+        }
+        .drop{
+            animation: dropIn 1s ease forwards;
+        }
+        @keyframes dropIn{
+            from{transform:translateY(-1500px);}
+            to{transform: translateY(0);}
+        }
+        .a{
+            animation-delay: 100ms;
+        }
+        .b{
+            animation-delay: 300ms;
+
+        }
+        .c{
+            animation-delay: 500ms;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 id="yourturn"></h2>
+        <table>
+            <tr class="drop a">
+                <td id="00" onclick="changeState(this.id)" readonly="true"></td>
+                <td id="01" onclick="changeState(this.id)" aria-readonly="true"></td>
+                <td id="02" onclick="changeState(this.id)" aria-readonly="true"></td>
+            </tr>
+            <tr class="drop b">
+                <td id="10" onclick="changeState(this.id)" aria-readonly="true"></td>
+                <td id="11" onclick="changeState(this.id)" aria-readonly="true"></td>
+                <td id="12" onclick="changeState(this.id)" aria-readonly="true"></td>
+            </tr>
+            <tr class="drop c">
+                <td id="20" onclick="changeState(this.id)" aria-readonly="true"></td>
+                <td id="21" onclick="changeState(this.id)" aria-readonly="true"></td>
+                <td id="22" onclick="changeState(this.id)" aria-readonly="true"></td>
+            </tr>
+        </table>
+        
+        
+    </div>
+    <script>
+
+        let count=0
+        let xcount=0
+        const player1=window.prompt("Player 1 Name")
+        const player2=window.prompt("Player 2 Name")
+        //const player1=player1,player2=player2
+        let playe1,playe2
+        let win=0
+
+        let name
+
+        const matrix=3
+        //const arr=new Array(matrix)
+        
+        const arr=Array.from(Array(matrix),()=>new Array(matrix))
+        const click=[]
+
+        
+        
+       /*  const player1='Selva'
+        const player2='Siva' */
+
+        /* for(let i = 0; i < matrix; i++) 
+        {
+            arr[i] = [];
+        } */
+
+        document.getElementById("yourturn").innerHTML=count%2==0?player1:player2
+        
+        function changeState(id)
+        {
+            if(click.indexOf(id) == -1)  
+            {  
+                count++
+                let row=parseInt(id[0])
+                let col=parseInt(id[1])
+                
+                arr[row][col]=document.getElementById(id).innerHTML=count%2==0?player2:player1
+                arr[row][col]==player1?document.getElementById(id).style.backgroundColor='green':document.getElementById(id).style.backgroundColor='blue'
+                name=document.getElementById("yourturn").innerHTML=count%2==0?player2:player1
+                document.getElementById("yourturn").innerHTML=count%2==0?player1:player2
+                
+                click.push(id)
+
+                rowCheck(row,col)
+                colCheck(row,col)
+                crossleftCheck(row,col)
+                crossrightCheck(row,col)
+                
+                if(count==matrix*matrix && win==0)
+                {
+                    alert("Try Again")
+                    window.location.reload()
+                }
+            }
+        }
+
+        function rowCheck(row,col)
+        {   
+            xcount=0
+            const target=arr[row][col]==player1?player1:player2
+            for(let j=0;j<matrix;j++)
+            {
+                if(arr[row][j]==target )
+                {
+                    if(!arr[row][j+1]==target)
+                    {
+                        console.log('break')
+                        break
+                    }
+                    xcount++;
+                }
+            }
+            xcount==matrix?winning():xcount=0
+        }
+        
+        function colCheck(row,col)
+        {
+            xcount=0
+            const target=arr[row][col]==player1?player1:player2
+            for(let j=0;j<matrix;j++)
+            {
+                if(arr[j][col]==target )
+                {
+                    if(!arr[j][col+1]==target)
+                    {
+                        console.log('break')
+                        break
+                    }
+                    xcount++;
+                }
+            }
+            xcount==matrix?winning():xcount=0
+        }
+
+        function crossleftCheck(row,col){
+            xcount=0    
+            let i    
+            const target=arr[row][col]==player1?player1:player2  
+            for(let j=0;j<matrix;j++)
+            {
+                if(arr[j][j]==target)
+                {
+                    xcount++;
+                    if(j==matrix-1){
+                        break
+                    }
+                    if(!arr[j+1][j+1]==target){
+                        break
+                    }
+                }
+            }
+            xcount==matrix?winning():xcount=0
+        }
+
+        function crossrightCheck(row,col)
+        {
+            xcount=0
+            const target=arr[row][col]==player1?player1:player2  
+            for(let j=0;j<matrix;j++)
+            {
+                if(arr[j][matrix-(j+1)]==target)
+                {
+                    xcount++;
+                    if(j==matrix-1){
+                        break
+                    }
+                    if(!arr[j+1][matrix-(j+1+1)]==target){
+                        break
+                    }
+                    
+                }
+            }
+            xcount==matrix?winning():xcount=0
+        }   
+
+        function winning(){
+            win=1
+            alert(name+" Win "+ " Click 'ok' to Play Again")
+            window.location.reload()
+        }
+    </script>
+</body>
+</html>

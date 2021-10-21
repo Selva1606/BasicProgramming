@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Read file using JS</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <input type="file">
+        <h1>1.Choose file</h1>
+        <h1>2.See console</h1>
+    </div>
+    
+<script>
+
+     let input =document.querySelector('input');
+    let output = document.getElementById('output');
+
+    input.addEventListener('change', () => {
+    let files = input.files;
+
+    if(files.length == 0) return;
+
+    const file = files[0];
+
+    let reader = new FileReader();
+
+    reader.onload = (e) => {
+        const file = e.target.result;
+        const lines = file.split(/\r\n|\n/);
+        let str=lines.join('\n')
+        console.log(str)
+    };
+
+    reader.onerror = (e) => alert(e.target.error.name);
+
+    reader.readAsText(file); 
+    
+}); 
+</script>
+</body>
+</html>
